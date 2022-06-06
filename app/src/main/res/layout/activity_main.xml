@@ -1,18 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:background="@drawable/back_bg">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/ic_icon_home" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="You Travel"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search"
+        android:layout_below="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/search_bg"
+            android:paddingLeft="30dp"
+            android:hint="Search Destination"
+            android:textSize="14dp" />
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="55dp"
+            android:background="@drawable/ic_icon_search" />
+
+    </RelativeLayout>
 
     <TextView
+        android:id="@+id/textAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/search"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:text="Explore"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="italic|bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_below="@id/textAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/firstImage"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:onClick="locationOnClick"
+                    android:text="Aveiro, Portugal" />
+
+                <TextView
+                    android:id="@+id/firstText"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/secondImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/firstImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/secondText"
+                    android:layout_below="@id/firstText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/thirdImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/secondImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/thirdText"
+                    android:layout_below="@id/secondText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/fourthImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/thirdImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/fourthText"
+                    android:layout_below="@id/thirdText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/fifthImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/fourthImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/fifthText"
+                    android:layout_below="@id/fourthText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/sixthImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/fifthImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/sixthText"
+                    android:layout_below="@id/fifthText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/seventhImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_below="@+id/sixthImage"
+                    android:onClick="locationOnClick"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/seventhText"
+                    android:layout_below="@id/sixthText"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="right|bottom"
+                    android:clickable="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+                </TextView>
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

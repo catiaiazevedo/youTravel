@@ -1,71 +1,34 @@
 {
   "project_info": {
-    "project_number": "683430333711",
-    "firebase_url": "https://aveiroexplorericm-default-rtdb.firebaseio.com",
-    "project_id": "aveiroexplorericm",
-    "storage_bucket": "aveiroexplorericm.appspot.com"
+    "project_number": "22297468102",
+    "firebase_url": "https://youlearnicm-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "youlearnicm",
+    "storage_bucket": "youlearnicm.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:683430333711:android:b8e504b9ddaa2dfd99427a",
-        "android_client_info": {
-          "package_name": "com.example.aveiroexplorer"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "683430333711-a0rj2mrsmh3saqrs0arel6n3qjmlrvck.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.aveiroexplorer",
-            "certificate_hash": "25d9bdbefb8a3d83ce1309fc1802fc316c646177"
-          }
-        },
-        {
-          "client_id": "683430333711-84gfqs5tnetcrbc1iajfdsqsnvaulp84.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC1DwIa_5ePRvRloRivtkB4TLpuKH4G7yg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "683430333711-84gfqs5tnetcrbc1iajfdsqsnvaulp84.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:683430333711:android:6c3ce35a9103588099427a",
+        "mobilesdk_app_id": "1:22297468102:android:2d071d60bc2a6768324bc7",
         "android_client_info": {
           "package_name": "com.example.youtravel"
         }
       },
       "oauth_client": [
         {
-          "client_id": "683430333711-84gfqs5tnetcrbc1iajfdsqsnvaulp84.apps.googleusercontent.com",
+          "client_id": "22297468102-kjukmjtcgubv424natmiel52ldapo13s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC1DwIa_5ePRvRloRivtkB4TLpuKH4G7yg"
+          "current_key": "AIzaSyDY4y2O6Wd3aaKyc9hQDUTO2YSDnMgmLIs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "683430333711-84gfqs5tnetcrbc1iajfdsqsnvaulp84.apps.googleusercontent.com",
+              "client_id": "22297468102-kjukmjtcgubv424natmiel52ldapo13s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
