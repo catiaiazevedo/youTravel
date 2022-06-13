@@ -14,10 +14,11 @@
         android:padding="30dp">
 
         <Button
+            android:id="@+id/home"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/ic_icon_home" />
 
         <TextView
@@ -38,14 +39,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
-        <EditText
+        <AutoCompleteTextView
+            android:id="@+id/searchBar"
             android:layout_width="340dp"
             android:layout_height="55dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/search_bg"
-            android:paddingLeft="30dp"
             android:hint="Search Destination"
+            android:paddingLeft="30dp"
             android:textSize="14dp" />
 
         <Button

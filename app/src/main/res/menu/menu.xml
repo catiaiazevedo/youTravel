@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/addTrip" android:title="Add Trip"></item>
+    <item android:id="@+id/myTrips" android:title="My Trips"></item>
+    <item android:id="@+id/logout" android:title="Logout"></item>
+</menu>

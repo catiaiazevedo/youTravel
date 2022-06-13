@@ -21,6 +21,7 @@
             android:background="@drawable/top_arrow" />
 
         <Button
+            android:id="@+id/home"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
@@ -46,10 +47,10 @@
             android:layout_marginLeft="40dp"/>
 
         <TextView
+            android:id="@+id/tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="The heavenly land built with love\nand magic"
             android:textColor="#fff"
             android:textSize="18dp"
             android:layout_marginLeft="40dp"/>
@@ -65,9 +66,9 @@
             android:layout_marginLeft="330dp"/>
 
         <TextView
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Since 13€"
             android:textColor="#fff"
             android:textSize="18dp"
             android:layout_marginLeft="305dp"/>
@@ -78,14 +79,12 @@
             android:layout_marginTop="30dp">
 
             <Button
+                android:id="@+id/explore"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="25dp"
-                android:background="@drawable/button_bg"
-                android:text="Explore"
-                android:textColor="#fff"
-                android:textSize="14dp" />
+                android:text="Explore"/>
 
         </RelativeLayout>
 

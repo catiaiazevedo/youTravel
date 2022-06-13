@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouTravel">
         <activity
+            android:name=".Exlore"
+            android:exported="false" />
+        <activity
             android:name=".Location"
             android:exported="false" />
         <activity
