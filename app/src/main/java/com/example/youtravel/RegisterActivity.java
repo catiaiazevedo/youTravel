@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -96,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("id", documentReference.getId());
                                             startActivity(intent);
                                             onPause();
                                             finish();

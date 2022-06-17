@@ -39,6 +39,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,10 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
     Button home;
 
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            id = bundle.getString("id");
+            System.out.println(id);
+        }
 
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(0));
                                 intent.putExtra("price", price.get(0));
                                 intent.putExtra("description", description.get(0));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -222,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(1));
                                 intent.putExtra("price", price.get(1));
                                 intent.putExtra("description", description.get(1));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -231,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(2));
                                 intent.putExtra("price", price.get(2));
                                 intent.putExtra("description", description.get(2));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -240,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(3));
                                 intent.putExtra("price", price.get(3));
                                 intent.putExtra("description", description.get(3));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -249,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(4));
                                 intent.putExtra("price", price.get(4));
                                 intent.putExtra("description", description.get(4));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -258,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(5));
                                 intent.putExtra("price", price.get(5));
                                 intent.putExtra("description", description.get(5));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -267,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(6));
                                 intent.putExtra("price", price.get(6));
                                 intent.putExtra("description", description.get(6));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -296,7 +314,8 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void showPopup(View v) {
+    public void showPopup(View v)
+    {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu, popup.getMenu());
@@ -321,6 +340,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void createFolder(String id)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+
+        // Create a child reference imagesRef now points to "images"
+        StorageReference idRef = storageRef.child(id);
+
+        //idRef.putFile("");
     }
 
     @Override

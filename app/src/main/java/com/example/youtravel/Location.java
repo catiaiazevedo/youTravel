@@ -52,6 +52,7 @@ public class Location extends AppCompatActivity {
         String tagLine = bundle.getString("tagLine");
         String prices = bundle.getString("price");
         String description = bundle.getString("description");
+        String id = bundle.getString("id");
 
         explore = findViewById(R.id.explore);
         explore.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +71,7 @@ public class Location extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
                 onPause();
             }
