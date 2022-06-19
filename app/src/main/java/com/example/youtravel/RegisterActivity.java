@@ -98,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            intent.putExtra("id", documentReference.getId());
                                             startActivity(intent);
                                             onPause();
                                             finish();
