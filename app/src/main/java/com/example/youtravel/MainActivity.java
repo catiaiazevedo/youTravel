@@ -1,39 +1,23 @@
 package com.example.youtravel;
 
-import static android.service.controls.ControlsProviderService.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -42,13 +26,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,130 +64,119 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference deliveryRef = rootRef.collection("users");
-        Query nameQuery = deliveryRef.whereEqualTo("email", currentUser.getEmail());
-        nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("id",document.getId());
-                        editor.apply();
-                    }
+        Query nameQuery = deliveryRef.whereEqualTo("email", Objects.requireNonNull(currentUser).getEmail());
+        nameQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("id",document.getId());
+                    editor.apply();
                 }
             }
         });
         home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
+        home.setOnClickListener(this::showPopup);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("categories").document("todos");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    names = (List<String>) document.get("name");
-                    if (document.exists())
-                    {
-                        frontImages = (List<String>) document.get("front_image");
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                names = (List<String>) document.get("name");
+                if (document.exists())
+                {
+                    frontImages = (List<String>) document.get("front_image");
 
-                        firstImage = findViewById(R.id.firstImage);
-                        secondImage = findViewById(R.id.secondImage);
-                        thirdImage = findViewById(R.id.thirdImage);
-                        fourthImage = findViewById(R.id.fourthImage);
-                        fifthImage = findViewById(R.id.fifthImage);
-                        sixthImage = findViewById(R.id.sixthImage);
-                        seventhImage = findViewById(R.id.seventhImage);
+                    firstImage = findViewById(R.id.firstImage);
+                    secondImage = findViewById(R.id.secondImage);
+                    thirdImage = findViewById(R.id.thirdImage);
+                    fourthImage = findViewById(R.id.fourthImage);
+                    fifthImage = findViewById(R.id.fifthImage);
+                    sixthImage = findViewById(R.id.sixthImage);
+                    seventhImage = findViewById(R.id.seventhImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(0))
-                                .into(firstImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(0))
+                            .into(firstImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(1))
-                                .into(secondImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(1))
+                            .into(secondImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(2))
-                                .into(thirdImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(2))
+                            .into(thirdImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(3))
-                                .into(fourthImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(3))
+                            .into(fourthImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(4))
-                                .into(fifthImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(4))
+                            .into(fifthImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(5))
-                                .into(sixthImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(5))
+                            .into(sixthImage);
 
-                        Picasso
-                                .get()
-                                .load(frontImages.get(6))
-                                .into(seventhImage);
+                    Picasso
+                            .get()
+                            .load(frontImages.get(6))
+                            .into(seventhImage);
 
-                        firstText = findViewById(R.id.firstText);
-                        secondText = findViewById(R.id.secondText);
-                        thirdText = findViewById(R.id.thirdText);
-                        fourthText = findViewById(R.id.fourthText);
-                        fifthText = findViewById(R.id.fifthText);
-                        sixthText = findViewById(R.id.sixthText);
-                        seventhText = findViewById(R.id.seventhText);
+                    firstText = findViewById(R.id.firstText);
+                    secondText = findViewById(R.id.secondText);
+                    thirdText = findViewById(R.id.thirdText);
+                    fourthText = findViewById(R.id.fourthText);
+                    fifthText = findViewById(R.id.fifthText);
+                    sixthText = findViewById(R.id.sixthText);
+                    seventhText = findViewById(R.id.seventhText);
 
-                        firstText.setText(names.get(0));
-                        secondText.setText(names.get(1));
-                        thirdText.setText(names.get(2));
-                        fourthText.setText(names.get(3));
-                        fifthText.setText(names.get(4));
-                        sixthText.setText(names.get(5));
-                        seventhText.setText(names.get(6));
+                    firstText.setText(names.get(0));
+                    secondText.setText(names.get(1));
+                    thirdText.setText(names.get(2));
+                    fourthText.setText(names.get(3));
+                    fifthText.setText(names.get(4));
+                    sixthText.setText(names.get(5));
+                    seventhText.setText(names.get(6));
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, names);
-                        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.searchBar);
-                        textView.setAdapter(adapter);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, names);
+                    AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.searchBar);
+                    textView.setAdapter(adapter);
 
-                        textView.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    textView.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                            }
+                        }
 
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                                adapter.getFilter().filter(charSequence);
-                            }
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            adapter.getFilter().filter(charSequence);
+                        }
 
-                            @Override
-                            public void afterTextChanged(Editable editable) {
+                        @Override
+                        public void afterTextChanged(Editable editable) {
 
-                            }
-                        });
-                    }
-
-                    else
-                    {
-                        Toast.makeText(MainActivity.this, "No such document", Toast.LENGTH_SHORT).show();
-                    }
+                        }
+                    });
                 }
 
                 else
                 {
-                    Toast.makeText(MainActivity.this, "get failed with "+task.getException(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "No such document", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            else
+            {
+                Toast.makeText(MainActivity.this, "get failed with "+task.getException(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -217,113 +187,110 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("categories").document("todos");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    names = (List<String>) document.get("name");
-                    secondImages = (List<String>) document.get("second_image");
-                    tagLines = (List<String>) document.get("tagLine");
-                    price = (List<String>) document.get("price");
-                    description = (List<String>) document.get("description");
-                    latitude = (List<String>) document.get("latitude");
-                    longitude = (List<String>) document.get("longitude");
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                names = (List<String>) document.get("name");
+                secondImages = (List<String>) document.get("second_image");
+                tagLines = (List<String>) document.get("tagLine");
+                price = (List<String>) document.get("price");
+                description = (List<String>) document.get("description");
+                latitude = (List<String>) document.get("latitude");
+                longitude = (List<String>) document.get("longitude");
 
-                    if (document.exists())
+                if (document.exists())
+                {
+                    switch (view.getId())
                     {
-                        switch (view.getId())
-                        {
-                            case R.id.firstImage:
-                                intent.putExtra("name", names.get(0));
-                                intent.putExtra("second_image", secondImages.get(0));
-                                intent.putExtra("tagLine", tagLines.get(0));
-                                intent.putExtra("price", price.get(0));
-                                intent.putExtra("description", description.get(0));
-                                intent.putExtra("latitude", latitude.get(0));
-                                intent.putExtra("longitude", longitude.get(0));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.secondImage:
-                                intent.putExtra("name", names.get(1));
-                                intent.putExtra("second_image", secondImages.get(1));
-                                intent.putExtra("tagLine", tagLines.get(1));
-                                intent.putExtra("price", price.get(1));
-                                intent.putExtra("description", description.get(1));
-                                intent.putExtra("latitude", latitude.get(1));
-                                intent.putExtra("longitude", longitude.get(1));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.thirdImage:
-                                intent.putExtra("name", names.get(2));
-                                intent.putExtra("second_image", secondImages.get(2));
-                                intent.putExtra("tagLine", tagLines.get(2));
-                                intent.putExtra("price", price.get(2));
-                                intent.putExtra("description", description.get(2));
-                                intent.putExtra("latitude", latitude.get(2));
-                                intent.putExtra("longitude", longitude.get(2));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.fourthImage:
-                                intent.putExtra("name", names.get(3));
-                                intent.putExtra("second_image", secondImages.get(3));
-                                intent.putExtra("tagLine", tagLines.get(3));
-                                intent.putExtra("price", price.get(3));
-                                intent.putExtra("description", description.get(3));
-                                intent.putExtra("latitude", latitude.get(3));
-                                intent.putExtra("longitude", longitude.get(3));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.fifthImage:
-                                intent.putExtra("name", names.get(4));
-                                intent.putExtra("second_image", secondImages.get(4));
-                                intent.putExtra("tagLine", tagLines.get(4));
-                                intent.putExtra("price", price.get(4));
-                                intent.putExtra("description", description.get(4));
-                                intent.putExtra("latitude", latitude.get(4));
-                                intent.putExtra("longitude", longitude.get(4));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.sixthImage:
-                                intent.putExtra("name", names.get(5));
-                                intent.putExtra("second_image", secondImages.get(5));
-                                intent.putExtra("tagLine", tagLines.get(5));
-                                intent.putExtra("price", price.get(5));
-                                intent.putExtra("description", description.get(5));
-                                intent.putExtra("latitude", latitude.get(5));
-                                intent.putExtra("longitude", longitude.get(5));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                            case R.id.seventhImage:
-                                intent.putExtra("name", names.get(6));
-                                intent.putExtra("second_image", secondImages.get(6));
-                                intent.putExtra("tagLine", tagLines.get(6));
-                                intent.putExtra("price", price.get(6));
-                                intent.putExtra("description", description.get(6));
-                                intent.putExtra("latitude", latitude.get(6));
-                                intent.putExtra("longitude", longitude.get(6));
-                                startActivity(intent);
-                                onPause();
-                            break;
-                        }
-                    }
-
-                    else
-                    {
-                        Toast.makeText(MainActivity.this, "No such document", Toast.LENGTH_SHORT).show();
+                        case R.id.firstImage:
+                            intent.putExtra("name", names.get(0));
+                            intent.putExtra("second_image", secondImages.get(0));
+                            intent.putExtra("tagLine", tagLines.get(0));
+                            intent.putExtra("price", price.get(0));
+                            intent.putExtra("description", description.get(0));
+                            intent.putExtra("latitude", latitude.get(0));
+                            intent.putExtra("longitude", longitude.get(0));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.secondImage:
+                            intent.putExtra("name", names.get(1));
+                            intent.putExtra("second_image", secondImages.get(1));
+                            intent.putExtra("tagLine", tagLines.get(1));
+                            intent.putExtra("price", price.get(1));
+                            intent.putExtra("description", description.get(1));
+                            intent.putExtra("latitude", latitude.get(1));
+                            intent.putExtra("longitude", longitude.get(1));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.thirdImage:
+                            intent.putExtra("name", names.get(2));
+                            intent.putExtra("second_image", secondImages.get(2));
+                            intent.putExtra("tagLine", tagLines.get(2));
+                            intent.putExtra("price", price.get(2));
+                            intent.putExtra("description", description.get(2));
+                            intent.putExtra("latitude", latitude.get(2));
+                            intent.putExtra("longitude", longitude.get(2));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.fourthImage:
+                            intent.putExtra("name", names.get(3));
+                            intent.putExtra("second_image", secondImages.get(3));
+                            intent.putExtra("tagLine", tagLines.get(3));
+                            intent.putExtra("price", price.get(3));
+                            intent.putExtra("description", description.get(3));
+                            intent.putExtra("latitude", latitude.get(3));
+                            intent.putExtra("longitude", longitude.get(3));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.fifthImage:
+                            intent.putExtra("name", names.get(4));
+                            intent.putExtra("second_image", secondImages.get(4));
+                            intent.putExtra("tagLine", tagLines.get(4));
+                            intent.putExtra("price", price.get(4));
+                            intent.putExtra("description", description.get(4));
+                            intent.putExtra("latitude", latitude.get(4));
+                            intent.putExtra("longitude", longitude.get(4));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.sixthImage:
+                            intent.putExtra("name", names.get(5));
+                            intent.putExtra("second_image", secondImages.get(5));
+                            intent.putExtra("tagLine", tagLines.get(5));
+                            intent.putExtra("price", price.get(5));
+                            intent.putExtra("description", description.get(5));
+                            intent.putExtra("latitude", latitude.get(5));
+                            intent.putExtra("longitude", longitude.get(5));
+                            startActivity(intent);
+                            onPause();
+                        break;
+                        case R.id.seventhImage:
+                            intent.putExtra("name", names.get(6));
+                            intent.putExtra("second_image", secondImages.get(6));
+                            intent.putExtra("tagLine", tagLines.get(6));
+                            intent.putExtra("price", price.get(6));
+                            intent.putExtra("description", description.get(6));
+                            intent.putExtra("latitude", latitude.get(6));
+                            intent.putExtra("longitude", longitude.get(6));
+                            startActivity(intent);
+                            onPause();
+                        break;
                     }
                 }
 
                 else
                 {
-                    Toast.makeText(MainActivity.this, "get failed with "+task.getException(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "No such document", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            else
+            {
+                Toast.makeText(MainActivity.this, "get failed with "+task.getException(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -344,27 +311,24 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, popup.getMenu());
         popup.show();
 
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.addTrip:
-                        Intent intent = new Intent(getApplicationContext(),AddTripActivity.class);
-                        startActivity(intent);
-                        return true;
+        popup.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.addTrip:
+                    Intent intent = new Intent(getApplicationContext(),AddTripActivity.class);
+                    startActivity(intent);
+                    return true;
 
-                    case R.id.myTrips:
-                        Intent intent1 = new Intent(getApplicationContext(),MyTripsActivity.class);
-                        startActivity(intent1);
-                        return true;
+                case R.id.myTrips:
+                    Intent intent1 = new Intent(getApplicationContext(),MyTripsActivity.class);
+                    startActivity(intent1);
+                    return true;
 
-                    case R.id.logout:
-                        logoutUser();
-                        return true;
+                case R.id.logout:
+                    logoutUser();
+                    return true;
 
-                    default:
-                        return false;
-                }
+                default:
+                    return false;
             }
         });
     }

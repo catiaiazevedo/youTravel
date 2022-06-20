@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">youTravel</string>
+    <string name="map_api" translatable="false">AIzaSyD4Qdvrk2evUhs_EeBG9jVAPAMaya43yrs</string>
 </resources>

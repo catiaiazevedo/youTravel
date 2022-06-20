@@ -14,6 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/yellow</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">90dp</item>

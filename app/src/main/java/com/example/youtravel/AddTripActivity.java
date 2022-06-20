@@ -15,7 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -78,7 +77,6 @@ public class AddTripActivity extends AppCompatActivity {
         storageReference = storage.getReference();
         SharedPreferences sharedPreferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         id = sharedPreferences.getString("id","");
-        Log.d("TAG", id);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         cameraBtn.setOnClickListener(view -> askCameraPermissions());
@@ -86,6 +84,7 @@ public class AddTripActivity extends AppCompatActivity {
 
         saveBtn.setOnClickListener(view -> saveInFirebase());
     }
+
 
     private void askCameraPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){

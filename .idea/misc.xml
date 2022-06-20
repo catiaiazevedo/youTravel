@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/activity_add_trip.xml" value="0.11231884057971014" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/activity_exlore.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/activity_location.xml" value="0.1118659420289855" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/activity_map.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/activity_my_trips.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/layout/timeline_item.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/OneDrive/Ambiente de Trabalho/Cadeiras/3Ano/ICM/youTravel/app/src/main/res/xml/filte_path.xml" value="0.2" />
         <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/drawable/ic_icon_home.xml" value="0.182" />
         <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/drawable/ic_icon_search.xml" value="0.182" />
-        <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/drawable/ic_location.xml" value="0.2055" />
         <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/drawable/round_outline.xml" value="0.2055" />
         <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/layout/activity_exlore.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/CatiaAzevedo/Documents/ICM_android/youTravel/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />

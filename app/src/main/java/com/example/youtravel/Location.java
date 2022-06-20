@@ -1,32 +1,18 @@
 package com.example.youtravel;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class Location extends AppCompatActivity {
 
@@ -48,27 +34,21 @@ public class Location extends AppCompatActivity {
         String longitude = bundle.getString("longitude");
 
         explore = findViewById(R.id.explore);
-        explore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Exlore.class);
-                intent.putExtra("name", name);
-                intent.putExtra("description", description);
-                intent.putExtra("price", prices);
-                intent.putExtra("latitude", latitude);
-                intent.putExtra("longitude", longitude);
-                startActivity(intent);
-            }
+        explore.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), Explore.class);
+            intent.putExtra("name", name);
+            intent.putExtra("description", description);
+            intent.putExtra("price", prices);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+            startActivity(intent);
         });
 
         back = findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                onPause();
-            }
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            onPause();
         });
 
         LinearLayout layout =(LinearLayout) findViewById(R.id.layout);
@@ -101,42 +81,6 @@ public class Location extends AppCompatActivity {
 
         price = findViewById(R.id.price);
         price.setText("since "+prices);
-    }
-
-    private void logoutUser()
-    {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-        onPause();
-        finish();
-    }
-
-    public void showPopup(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu, popup.getMenu());
-        popup.show();
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.addTrip:
-                        return true;
-
-                    case R.id.myTrips:
-                        return true;
-
-                    case R.id.logout:
-                        logoutUser();
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
     }
 
     @Override

@@ -16,6 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YouTravel">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_api" />
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
         <activity
             android:name=".MyTripsActivity"
             android:exported="false" />
@@ -23,7 +30,7 @@
             android:name=".AddTripActivity"
             android:exported="false" />
         <activity
-            android:name=".Exlore"
+            android:name=".Explore"
             android:exported="false" />
         <activity
             android:name=".Location"
