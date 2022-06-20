@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     List<String> tagLines;
     List<String> price;
     List<String> description;
+    List<String> latitude;
+    List<String> longitude;
     ImageView firstImage, secondImage, thirdImage, fourthImage, fifthImage, sixthImage, seventhImage;
     TextView firstText, secondText, thirdText, fourthText, fifthText, sixthText, seventhText;
     SharedPreferences sharedPreferences;
@@ -225,6 +227,8 @@ public class MainActivity extends AppCompatActivity {
                     tagLines = (List<String>) document.get("tagLine");
                     price = (List<String>) document.get("price");
                     description = (List<String>) document.get("description");
+                    latitude = (List<String>) document.get("latitude");
+                    longitude = (List<String>) document.get("longitude");
 
                     if (document.exists())
                     {
@@ -236,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(0));
                                 intent.putExtra("price", price.get(0));
                                 intent.putExtra("description", description.get(0));
+                                intent.putExtra("latitude", latitude.get(0));
+                                intent.putExtra("longitude", longitude.get(0));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -245,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(1));
                                 intent.putExtra("price", price.get(1));
                                 intent.putExtra("description", description.get(1));
+                                intent.putExtra("latitude", latitude.get(1));
+                                intent.putExtra("longitude", longitude.get(1));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -254,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(2));
                                 intent.putExtra("price", price.get(2));
                                 intent.putExtra("description", description.get(2));
+                                intent.putExtra("latitude", latitude.get(2));
+                                intent.putExtra("longitude", longitude.get(2));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -263,6 +273,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(3));
                                 intent.putExtra("price", price.get(3));
                                 intent.putExtra("description", description.get(3));
+                                intent.putExtra("latitude", latitude.get(3));
+                                intent.putExtra("longitude", longitude.get(3));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -272,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(4));
                                 intent.putExtra("price", price.get(4));
                                 intent.putExtra("description", description.get(4));
+                                intent.putExtra("latitude", latitude.get(4));
+                                intent.putExtra("longitude", longitude.get(4));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -281,6 +295,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(5));
                                 intent.putExtra("price", price.get(5));
                                 intent.putExtra("description", description.get(5));
+                                intent.putExtra("latitude", latitude.get(5));
+                                intent.putExtra("longitude", longitude.get(5));
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -290,6 +306,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(6));
                                 intent.putExtra("price", price.get(6));
                                 intent.putExtra("description", description.get(6));
+                                intent.putExtra("latitude", latitude.get(6));
+                                intent.putExtra("longitude", longitude.get(6));
                                 startActivity(intent);
                                 onPause();
                             break;

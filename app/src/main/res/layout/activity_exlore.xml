@@ -10,15 +10,16 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/top_bg"
-        android:padding="40dp">
+        android:background="@drawable/top_bg">
 
         <Button
-            android:id="@+id/home"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_icon_home" />
+            android:id="@+id/location"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="25dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_location" />
 
     </RelativeLayout>
 
@@ -48,15 +49,15 @@
             android:id="@+id/textQR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/description"/>
+            android:layout_below="@id/description" />
 
         <Button
             android:id="@+id/qrCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/textQR"
             android:layout_marginTop="10dp"
-            android:text="QR code"
-            android:layout_below="@id/textQR"/>
+            android:text="QR code" />
 
     </RelativeLayout>
 

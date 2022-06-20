@@ -31,20 +31,12 @@ import java.nio.charset.StandardCharsets;
 public class Location extends AppCompatActivity {
 
     TextView title, tag, price;
-    Button back, explore, home;
+    Button back, explore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
 
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("name");
@@ -52,6 +44,8 @@ public class Location extends AppCompatActivity {
         String tagLine = bundle.getString("tagLine");
         String prices = bundle.getString("price");
         String description = bundle.getString("description");
+        String latitude = bundle.getString("latitude");
+        String longitude = bundle.getString("longitude");
 
         explore = findViewById(R.id.explore);
         explore.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +55,8 @@ public class Location extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("description", description);
                 intent.putExtra("price", prices);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
                 startActivity(intent);
             }
         });

@@ -20,13 +20,6 @@
             android:layout_alignParentLeft="true"
             android:background="@drawable/top_arrow" />
 
-        <Button
-            android:id="@+id/home"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_icon_home" />
-
     </RelativeLayout>
 
     <LinearLayout

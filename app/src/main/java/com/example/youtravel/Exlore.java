@@ -28,25 +28,29 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class Exlore extends AppCompatActivity {
 
     TextView name, description, textQR;
-    Button qrCode, home;
+    Button qrCode, location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exlore);
 
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
-
         Bundle bundle = getIntent().getExtras();
         String title = bundle.getString("name");
         String text = bundle.getString("description");
         String prices = bundle.getString("price");
+        String latitude = bundle.getString("latitude");
+        String longitude = bundle.getString("longitude");
+
+        location = findViewById(R.id.location);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //JUNQUEIRA AQUI
+                System.out.println(latitude);
+                System.out.println(longitude);
+            }
+        });
 
         name = findViewById(R.id.name);
         name.setText(title);
