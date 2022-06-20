@@ -8,7 +8,9 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -34,9 +36,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -56,30 +60,14 @@ public class MainActivity extends AppCompatActivity {
     List<String> description;
     ImageView firstImage, secondImage, thirdImage, fourthImage, fifthImage, sixthImage, seventhImage;
     TextView firstText, secondText, thirdText, fourthText, fifthText, sixthText, seventhText;
-
+    SharedPreferences sharedPreferences;
     Button home;
 
-    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null)
-        {
-            id = bundle.getString("id");
-            System.out.println(id);
-        }
-
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -89,6 +77,30 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        sharedPreferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        CollectionReference deliveryRef = rootRef.collection("users");
+        Query nameQuery = deliveryRef.whereEqualTo("email", currentUser.getEmail());
+        nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("id",document.getId());
+                        editor.apply();
+                    }
+                }
+            }
+        });
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        });
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("categories").document("todos");
@@ -224,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(0));
                                 intent.putExtra("price", price.get(0));
                                 intent.putExtra("description", description.get(0));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -234,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(1));
                                 intent.putExtra("price", price.get(1));
                                 intent.putExtra("description", description.get(1));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -244,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(2));
                                 intent.putExtra("price", price.get(2));
                                 intent.putExtra("description", description.get(2));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -254,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(3));
                                 intent.putExtra("price", price.get(3));
                                 intent.putExtra("description", description.get(3));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -264,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(4));
                                 intent.putExtra("price", price.get(4));
                                 intent.putExtra("description", description.get(4));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -274,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(5));
                                 intent.putExtra("price", price.get(5));
                                 intent.putExtra("description", description.get(5));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -284,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("tagLine", tagLines.get(6));
                                 intent.putExtra("price", price.get(6));
                                 intent.putExtra("description", description.get(6));
-                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 onPause();
                             break;
@@ -326,9 +331,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addTrip:
+                        Intent intent = new Intent(getApplicationContext(),AddTripActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.myTrips:
+                        Intent intent1 = new Intent(getApplicationContext(),MyTripsActivity.class);
+                        startActivity(intent1);
                         return true;
 
                     case R.id.logout:
@@ -342,18 +351,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void createFolder(String id)
-    {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
-        // Create a storage reference from our app
-        StorageReference storageRef = storage.getReference();
-
-        // Create a child reference imagesRef now points to "images"
-        StorageReference idRef = storageRef.child(id);
-
-        //idRef.putFile("");
-    }
 
     @Override
     protected void onPause() {

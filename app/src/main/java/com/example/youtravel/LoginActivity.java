@@ -82,23 +82,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful())
                             {
-                                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-                                CollectionReference deliveryRef = rootRef.collection("users");
-                                Query nameQuery = deliveryRef.whereEqualTo("email", mail);
-                                nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                intent.putExtra("id", document.getId());
-                                                startActivity(intent);
-                                                onPause();
-                                                finish();
-                                            }
-                                        }
-                                    }
-                                });
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                onPause();
+                                finish();
                             }
 
                             else
