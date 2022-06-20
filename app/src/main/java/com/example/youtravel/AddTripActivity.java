@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,13 +17,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -58,14 +63,14 @@ public class AddTripActivity extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     FusedLocationProviderClient fusedLocationProviderClient;
-    String localityName, imageData, currentPhotoPath, id;
+    String localityName, imageData, currentPhotoPath, id, latitude, longitude;
     FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trip);
-
+        setActionBar();
         selectedImage = findViewById(R.id.displayImageView);
         cameraBtn = findViewById(R.id.cameraBtn);
         saveBtn = findViewById(R.id.saveBtn);
@@ -108,6 +113,8 @@ public class AddTripActivity extends AppCompatActivity {
                     List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                     localityName = addresses.get(0).getLocality();
                     imageData = LocalDate.now().toString();
+                    latitude = Double.toString(location.getLatitude());
+                    longitude = Double.toString(location.getLongitude());
                 }
                 catch(Exception e){
                     e.printStackTrace();
@@ -125,6 +132,7 @@ public class AddTripActivity extends AppCompatActivity {
             StorageReference reference = storageReference.child(id+"/" + UUID.randomUUID().toString());
             reference.putFile(contentUri).addOnSuccessListener(taskSnapshot -> {
                 progressDialog.dismiss();
+                Toast.makeText(AddTripActivity.this, "Image saved successfully" , Toast.LENGTH_SHORT).show();
                 reference.getDownloadUrl().addOnSuccessListener(uri -> {
                     db = FirebaseFirestore.getInstance();
                     Map<String, Object> image = new HashMap<>();
@@ -132,17 +140,20 @@ public class AddTripActivity extends AppCompatActivity {
                     image.put("Location", localityName);
                     image.put("Date", imageData);
                     image.put("Rating", String.valueOf(ratingBar.getRating()));
+                    image.put("Latitude", latitude);
+                    image.put("Longitude",longitude);
                     db.collection(id).add(image);
                 });
                 saveBtn.setEnabled(false);
                 ratingBar.setEnabled(false);
+                selectedImage.setImageResource(R.drawable.noimage);
             })
-                    .addOnFailureListener(e -> Toast.makeText(AddTripActivity.this, "Error occurred" + e.getMessage(), Toast.LENGTH_SHORT).show())
-                    . addOnProgressListener(snapshot -> {
-                        double progress = (100.0 * (double)snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        progressDialog.setMessage("Saved " + (int) progress + "%");
+            .addOnFailureListener(e -> Toast.makeText(AddTripActivity.this, "Error occurred" + e.getMessage(), Toast.LENGTH_SHORT).show())
+            . addOnProgressListener(snapshot -> {
+                double progress = (100.0 * (double)snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                progressDialog.setMessage("Saved " + (int) progress + "%");
 
-                    });
+            });
         }
     }
 
@@ -201,4 +212,32 @@ public class AddTripActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void setActionBar() {
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM|ActionBar.DISPLAY_SHOW_TITLE);
+
+        actionBar.setCustomView(R.layout.abs_layout);
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#c8a2c8")));
+
+        TextView titleView = findViewById(R.id.absLayout);
+        titleView.setText("Add Trip Photos");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

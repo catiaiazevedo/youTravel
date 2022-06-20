@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="270dp">
+    android:layout_height="270dp"
+    android:layout_marginBottom="10dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="11dp"
-        app:cardElevation="11dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        app:strokeColor="#FFEA00"
-        app:strokeWidth="2dp">
+        app:strokeColor="@color/yellow"
+        app:strokeWidth="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/itemImage"
@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
             android:layout_marginTop="45dp"
-            android:text="Ola"
             android:textSize="20sp"
             android:textStyle="italic" />
 
@@ -64,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
             android:layout_marginTop="110dp"
-            android:text="Ola"
             android:textSize="20sp"
             android:textStyle="italic" />
 
@@ -83,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
             android:layout_marginTop="175dp"
-            android:text="Ola"
             android:textSize="20sp"
             android:textStyle="italic" />
 
