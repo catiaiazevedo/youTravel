@@ -16,10 +16,10 @@
             android:id="@+id/location"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="25dp"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bottom_arrow" />
+            android:background="@drawable/ic_location" />
 
     </RelativeLayout>
 
@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
             android:layout_below="@+id/name"
             android:textColor="@color/black"
             android:textSize="20dp" />
